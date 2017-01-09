@@ -32,3 +32,28 @@ Route::get('blade', function(){
     $drinks = array('Vodka', 'Gin', 'Brandy');
     return view('page', ['name'=>'The Raven', 'day'=>'Friday', 'drinks'=>$drinks]);
 });
+Route::get('/insert', function(){
+    App\Category::create(['name'=>'Music']);
+    return 'category added';
+});
+Route::get('/read', function(){
+    $category = new App\Category();
+
+    $data = $category->all(['name', 'id']);
+
+    foreach($data as $list){
+        echo '<p>'. $list->id . ' ' . $list->name. ''.'</p>';
+    }
+});
+Route::get('/update', function(){
+    $category = App\Category::find(1);
+    $category->name = 'HEAVY METAL';
+    $category->save();
+
+    $data = $category->all(['name', 'id']);
+
+    foreach($data as $list){
+        echo $list->id . ' ' . $list->name . '';
+    }
+});
+Route::post('/cart', 'Front@cart');

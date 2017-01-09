@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDrinksTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateDrinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('drinks', function(Blueprint $table){
+        Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',75)->unique();
-            $table->text('comments')->nullable();
-            $table->integer('rating');
-            $table->date('brew_date');
+            $table->string('url', 255)->unique();
+            $table->string('title', 140);
+            $table->string('description', 170);
+            $table->text('content');
+            $table->boolean('blog');
             $table->timestamps();
+            $table->string('created_at_ip');
+            $table->string('updated_at_ip');
         });
     }
 
@@ -30,6 +33,6 @@ class CreateDrinksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('drinks');
+        Schema::drop('posts');
     }
 }

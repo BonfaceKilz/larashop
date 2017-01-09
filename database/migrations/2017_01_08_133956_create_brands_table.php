@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyGenderInEmployees extends Migration
+class CreateBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class ModifyGenderInEmployees extends Migration
      */
     public function up()
     {
-        Schema::table('employees', function (Blueprint $table) {
-            //
+        Schema::create('brands', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 255)->unique();
+            $table->timestamps();
+            $table->string('created_at_ip');
+            $table->string('updated_at_ip');
         });
     }
 
@@ -25,8 +29,6 @@ class ModifyGenderInEmployees extends Migration
      */
     public function down()
     {
-        Schema::table('employees', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('brands');
     }
 }
